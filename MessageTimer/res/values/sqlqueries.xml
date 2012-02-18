@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="SQL_CREATE_TABLE_MESSAGES">
+	<![CDATA[
+	CREATE TABLE [Messages] ([ID] INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL, 
+			   					  [PhoneNumber] TEXT NOT NULL, 
+								  [Message] TEXT NOT NULL,
+								  [Time] NUMERIC NOT NULL,
+								  [Enabled] SHORT NOT NULL)
+	]]>
+</string>
+</resources>
