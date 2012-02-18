@@ -6,14 +6,16 @@
 
     <uses-sdk android:minSdkVersion="8" />
     <application android:name="com.devcamp.messagetimer.MessageTimerApplication"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
-        <activity android:name="com.devcamp.messagetimer.MainActivity" >
-            <intent-filter >
+        android:icon="@drawable/ic_launcher"        android:label="@string/app_name" >
+        <activity
+            android:name="com.devcamp.messagetimer.MessageList"
+            android:label="@string/app_name" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.devcamp.messagetimer.MessageEditorActivity" />
     </application>
+	
 </manifest>

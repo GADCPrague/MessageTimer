@@ -5,20 +5,29 @@
     android:layout_height="fill_parent"
     android:background="#ffffff"
     android:orientation="vertical" >
+    
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:src="@drawable/logo" />
     
     <ListView
-        android:id="@+id/list"
+        android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="0px"
         android:layout_margin="0dp"
         android:layout_weight="1" />
-
+
     <ImageButton
         android:id="@+id/btn_message_add"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:padding="0dp"
-        android:src="@drawable/add_message" />
+        android:layout_marginBottom="-7dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="-2dp"
+        android:src="@drawable/new_message" />
     
 </LinearLayout>
