@@ -1,12 +1,13 @@
 package com.devcamp.messagetimer;
 
+import com.devcamp.messagetimer.tools.Database;
+
 import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
 
 public abstract class BaseActivity extends Activity
 {
-	
 	public void showMessage(final String msg)
 	{
 		getContentView().post(new Runnable()
@@ -44,4 +45,9 @@ public abstract class BaseActivity extends Activity
 	}
 	
 	protected abstract View getContentView();
+	
+	public Database getDatabase()
+	{
+		return ((MessageTimerApplication)getApplicationContext()).getDatabase();
+	}
 }
