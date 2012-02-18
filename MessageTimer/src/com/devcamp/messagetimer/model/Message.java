@@ -9,4 +9,5 @@ public class Message
 	public String message;
 	public Date when;
 	public boolean isEnabled;
+	
 }
