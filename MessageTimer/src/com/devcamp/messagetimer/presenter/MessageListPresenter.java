@@ -2,6 +2,8 @@ package com.devcamp.messagetimer.presenter;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.devcamp.messagetimer.MessageListActivity;
 
@@ -15,10 +17,11 @@ private MessageListActivity mActivity = null;
 	}
 	
 	private void bind(){
-		mActivity.getListView().setOnClickListener(new OnClickListener()
+		mActivity.getListView().setOnItemClickListener(new OnItemClickListener()
 		{
+
 			@Override
-			public void onClick(View v)
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
 			{
 				onMessageClick();
 			}
