@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MessageTimer</string>
+    
+    <string name="txtAddNewTemplate">Add new template</string>
+    <string name="txtSaveMessage">Save message</string>
 
 </resources>
