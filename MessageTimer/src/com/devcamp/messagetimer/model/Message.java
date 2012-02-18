@@ -8,5 +8,6 @@ public class Message
 	public String phoneNumber;
 	public String message;
 	public Date when;
+	public boolean isDateEnabled;
 	public boolean isEnabled;
 }
