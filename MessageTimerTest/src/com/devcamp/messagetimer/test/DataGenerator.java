@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import android.widget.TextView;
+
 import com.devcamp.messagetimer.model.Message;
+import com.devcamp.messagetimer.model.TemplateText;
 import com.devcamp.messagetimer.tools.StringTools;
 
 public class DataGenerator
@@ -23,11 +26,30 @@ public class DataGenerator
 	public static Message getRandomMessage()
 	{
 		Message m = new Message();
+		m.contact = StringTools.generateRandomString();
 		m.isEnabled = r.nextBoolean();
 		m.message = StringTools.generateRandomString(50, 100);
 		m.phoneNumber = "+420" + StringTools.generateRandomNumericString(6, 9);
 		m.when = generateRandomDate();
+		m.isTimeEnabled = r.nextBoolean();
 		return m;
+	}
+	
+	public static List<TemplateText> getRandomTemplates(int howMany)
+	{
+		List<TemplateText> data = new ArrayList<TemplateText>();
+		for(int i = 0;i<howMany;i++)
+		{
+			data.add(getRandomTemplateText());
+		}
+		return data;
+	}
+	public static TemplateText getRandomTemplateText()
+	{
+		TemplateText tt = new TemplateText();
+		tt.name = StringTools.generateRandomString();
+		tt.value = StringTools.generateRandomString(50,100);
+		return tt;
 	}
 	
 	public static Date generateRandomDate()

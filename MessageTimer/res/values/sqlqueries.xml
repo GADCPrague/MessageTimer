@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="SQL_CREATE_TABLE_MESSAGES">
-	<![CDATA[
+
+    <string name="SQL_CREATE_TABLE_MESSAGES">        <![CDATA[
 	CREATE TABLE [Messages] ([ID] INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL, 
 			   					  [PhoneNumber] TEXT NOT NULL, 
+			   					  [ConcactName] TEXT NOT NULL,
 								  [Message] TEXT NOT NULL,
+								  [IsTimeEnabled] SHORT NOT NULL,
 								  [Time] NUMERIC NOT NULL,
 								  [Enabled] SHORT NOT NULL)
 	]]>
-</string>
+    </string>
+    
+    <string name="SQL_CREATE_TABLE_TEMPLATES">        <![CDATA[
+	CREATE TABLE [Templates] ([ID] INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL, 
+			   					  [Name] TEXT NOT NULL, 
+			   					  [Value] TEXT NOT NULL)
+	]]>
+    </string>
+
 </resources>

@@ -79,7 +79,7 @@ public class MessageEditorActivity extends BaseActivity
 		return mDateEnabled;
 	}
 
-	public EditText getWhenHour()
+	public EditText getWhenTime()
 	{
 		return mWhenHour;
 	}
