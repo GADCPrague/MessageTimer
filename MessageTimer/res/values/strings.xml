@@ -17,6 +17,8 @@
     <string name="txtICQ">ICQ</string>
     <string name="txtUserName">UserName</string>
     <string name="txtPassword">Password</string>
+ <string name="btnAddNewMessage"><b>Add new message ...</b></string>
     <string name="btnAddNewMessage"><b>Add new message ...</b></string>
-    <string name="lblOpenPreferences">OpenPreferences</string>
-</resources>
+   
+<<<<<<< .mine    <string name="lblOpenPreferences">OpenPreferences</string>
+</resources>=======>>>>>>> .theirs

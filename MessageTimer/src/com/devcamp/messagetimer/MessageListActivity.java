@@ -30,9 +30,11 @@ public class MessageListActivity extends BaseActivity {
         setContentView(R.layout.message_list);
         init();
  		new MessageListPresenter(this);
+ 		
     }
     
     private void init() {
+     
         mAddMessage = (Button) findViewById(R.id.btn_message_add);
         mContentView = View.inflate(this, R.layout.message_editor, null);
         mList =  (ListView) findViewById(android.R.id.list);
