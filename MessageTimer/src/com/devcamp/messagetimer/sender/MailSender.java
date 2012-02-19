@@ -1,6 +1,7 @@
 package com.devcamp.messagetimer.sender;
 
 import android.content.Context;
+import android.util.Log;
 
 public class MailSender extends Sender
 {
@@ -13,7 +14,7 @@ public class MailSender extends Sender
 	@Override
 	public void sendMessage(String to, String message)
 	{
-		
+		Log.v("SMSSender","sendMessage");
 	}
 
 }

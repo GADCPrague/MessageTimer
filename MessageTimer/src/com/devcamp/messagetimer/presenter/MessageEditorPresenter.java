@@ -12,6 +12,7 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ import com.devcamp.messagetimer.sender.GTalkSender;
 import com.devcamp.messagetimer.sender.MailSender;
 import com.devcamp.messagetimer.sender.SMSSender;
 import com.devcamp.messagetimer.tools.Database;
+import com.devcamp.messagetimer.tools.MessageAlarmManager;
 import com.devcamp.messagetimer.tools.MobileSettingsProvider;
 
 public class MessageEditorPresenter
@@ -52,6 +54,7 @@ public class MessageEditorPresenter
 	private Date mLastDate;
 	private Database mDatabase = null;
 	private String[] mServiceValues = null;
+	private MessageAlarmManager mAlarmManager = null;
 	
 	public MessageEditorPresenter(MessageEditorActivity activity)
 	{
@@ -72,11 +75,15 @@ public class MessageEditorPresenter
 	private void init()
 	{
 		mServiceValues = mActivity.getResources().getStringArray(R.array.servicesValues);
-		if(mActivity.getIntent().hasExtra(MT.MESSAGE_ID))
-		{
-			Long id = mActivity.getIntent().getExtras().getLong(MT.MESSAGE_ID);
+		mAlarmManager = new MessageAlarmManager(mActivity);
+//		if(mActivity.getIntent().hasExtra(MT.MESSAGE_ID))
+//		{
+//			Long id = mActivity.getIntent().getExtras().getLong(MT.MESSAGE_ID);
+//			setMessage(mDatabase.getMessages(id).get(0));
+//		}
+		
+			Long id = (long) 1;
 			setMessage(mDatabase.getMessages(id).get(0));
-		}
 	}
 	
 	private void bind()
@@ -204,7 +211,7 @@ public class MessageEditorPresenter
 	{
 		if(mLastDate == null) throw new InvalidParameterException("DATE");
 		if(mLastTime == null) throw new InvalidParameterException("TIME");
-		return new Date(mLastDate.getYear(), mLastDate.getMonth(), mLastDate.getDate(),mLastTime.getHours(),mLastTime.getMinutes(),mLastTime.getSeconds());
+		return new Date(mLastDate.getYear(), mLastDate.getMonth(), mLastDate.getDate(),mLastTime.getHours(),mLastTime.getMinutes(),0);
 	}
 	
 	public void onAddTemplateClick()
@@ -222,11 +229,16 @@ public class MessageEditorPresenter
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				String t = et.getText().toString();
-				TemplateText tt = new TemplateText();
-				tt.name = t;
-				tt.value = mActivity.getMessage().getText().toString();
-				onAddTemplate(tt);
+//				mActivity.registerReceiver(new TestRec(), new IntentFilter());
+//				Intent i = new Intent(mActivity, TestRec.class);
+//				mActivity.sendBroadcast(i);
+				
+//				
+//				String t = et.getText().toString();
+//				TemplateText tt = new TemplateText();
+//				tt.name = t;
+//				tt.value = mActivity.getMessage().getText().toString();
+//				onAddTemplate(tt);
 			}
 		});
 		b.setTitle(R.string.txtTemplateName);
@@ -236,6 +248,9 @@ public class MessageEditorPresenter
 	
 	public void onAddTemplate(TemplateText tt)
 	{
+		
+		
+		
 		try
 		{
 			if(tt.name == null || tt.name.trim().length() == 0)
@@ -268,8 +283,8 @@ public class MessageEditorPresenter
 			else
 				mDatabase.addMessage(m);
 			
+			mAlarmManager.activateOrUpdateAlarm(m);
 			mActivity.showMessage(R.string.txtSaved);
-		
 		}
 		catch(InvalidParameterException ipe)
 		{
@@ -291,9 +306,8 @@ public class MessageEditorPresenter
 				if(mLastDate == null)
 					mLastDate = new Date();
 				mLastDate.setYear(year - 1900);
-				mLastDate.setMonth(monthOfYear - 1);
+				mLastDate.setMonth(monthOfYear);
 				mLastDate.setDate(dayOfMonth);
-				
 				mActivity.getWhenDate().setText(MT.DATEFORMAT.format(mLastDate));
 			}
 		};
@@ -302,7 +316,7 @@ public class MessageEditorPresenter
 		int years = (mLastTime == null) ? now.getYear() : mLastTime.getYear();
 		years += 1900;//OMG!
 		int month = (mLastTime == null) ? now.getMonth() : mLastTime.getMonth();
-		month += 1;//OMG FUCK!
+//		month -= 1;//OMG FUCK!
 		int days = (mLastTime == null) ? now.getDate() : mLastTime.getDate();
 		
 		DatePickerDialog dpd = new DatePickerDialog(mActivity, callback, years, month, days);
