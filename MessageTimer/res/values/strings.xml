@@ -17,5 +17,4 @@
     <string name="txtICQ">ICQ</string>
     <string name="txtUserName">UserName</string>
     <string name="txtPassword">Password</string>
-    <string name="txtMessageHasBeenSent">Message has been sent!</string>
-</resources>
+<string name="btnAddNewMessage"><b>Add new message ...</b></string><string name="txtMessageHasBeenSent">Message has been sent!</string></resources>
