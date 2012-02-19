@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="PROPERTY_ICQ_LOGIN">PROPERTY_ICQ_LOGIN</string>
+    <string name="PROPERTY_ICQ_PASSWORD">PROPERTY_ICQ_PASSWORD</string>
+    <string name="PROPERTY_GTALK_LOGIN">PROPERTY_GTALK_LOGIN</string>
+    <string name="PROPERTY_GTALK_PASSWORD">PROPERTY_GTALK_PASSWORD</string>
+</resources>

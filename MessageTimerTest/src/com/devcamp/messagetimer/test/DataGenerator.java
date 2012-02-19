@@ -26,6 +26,7 @@ public class DataGenerator
 	public static Message getRandomMessage()
 	{
 		Message m = new Message();
+		m.service = StringTools.generateRandomString();
 		m.contact = StringTools.generateRandomString();
 		m.isEnabled = r.nextBoolean();
 		m.message = StringTools.generateRandomString(50, 100);

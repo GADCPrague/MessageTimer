@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="services">
+        <item>SMS</item>
+        <item>Email</item>
+        <item>GTalk</item>
+        <item>ICQ</item>
+    </string-array>
+    <string-array name="servicesValues">
+        <item>com.devcamp.messagetimer.sender.SMSSender</item>
+        <item>com.devcamp.messagetimer.sender.MailSender</item>
+        <item>com.devcamp.messagetimer.sender.GTalkSender</item>
+        <item>com.devcamp.messagetimer.sender.ICQSender</item>
+    </string-array>
+</resources>

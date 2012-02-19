@@ -19,8 +19,8 @@
         android:layout_height="0px"
         android:layout_margin="0dp"
         android:layout_weight="1" />
-
-    <ImageButton
+
+    <Button
         android:id="@+id/btn_message_add"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -28,6 +28,11 @@
         android:layout_marginLeft="-5dp"
         android:layout_marginRight="-5dp"
         android:layout_marginTop="-2dp"
-        android:src="@drawable/new_message" />
+        android:text="@string/btnAddNewMessage"
+        android:drawableLeft="@android:drawable/ic_input_add"
+ 		android:gravity="left|center_vertical"
+ 		android:textColor="#000000"
+        android:textSize="24sp" />
+  
     
 </LinearLayout>

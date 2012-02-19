@@ -3,6 +3,19 @@
     <string name="app_name">MessageTimer</string>
     
     <string name="txtAddNewTemplate">Add new template</string>
+    <string name="txtSaveAsTemplate">Save as template</string>
     <string name="txtSaveMessage">Save message</string>
+    <string name="txtOK">OK</string>
+    <string name="txtCancel">Cancel</string>
+    <string name="txtSaved">Saved</string>
 
+        
+    <string name="txtNoSelector">No selector for this type!</string>
+    <string name="txtTemplateName">Template name</string>
+    
+    <string name="txtGTalk">GTalk</string>
+    <string name="txtICQ">ICQ</string>
+    <string name="txtUserName">UserName</string>
+    <string name="txtPassword">Password</string>
+    <string name="btnAddNewMessage"><b>Add new message ...</b></string>
 </resources>

@@ -15,6 +15,7 @@ public class DataComparator extends TestCase
 		if(ids)
 			assertEquals(m1.id,m2.id);
 		
+		assertEquals(m1.service,m2.service);
 		assertEquals(m1.isEnabled,m2.isEnabled);
 		assertEquals(m1.contact, m2.contact);
 		assertEquals(m1.message, m2.message);

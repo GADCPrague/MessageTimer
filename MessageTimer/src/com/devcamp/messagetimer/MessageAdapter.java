@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import com.devcamp.messagetimer.model.Message;
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 TextView tt = (TextView) v.findViewById(R.id.txt_message_text);
                 TextView td = (TextView) v.findViewById(R.id.txt_message_date);
                 if (tr != null) {
-                      tr.setText(o.phoneNumber); }
+                      tr.setText(Html.fromHtml(String.format("<b>%1$s</b>",o.phoneNumber))); }
                 if(tt != null){
                       tt.setText(o.message);
                 }
