@@ -7,6 +7,7 @@ import java.util.List;
 import com.devcamp.messagetimer.R;
 import com.devcamp.messagetimer.model.Message;
 import com.devcamp.messagetimer.model.TemplateText;
+import com.devcamp.messagetimer.tools.Database.Structure.Messages;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -97,6 +98,7 @@ public class Database extends SQLiteOpenHelper
 		while(c.moveToNext())
 		{
 			Message m = new Message();
+			m.service = c.getString(c.getColumnIndex(Structure.Messages.SERVICE));
 			m.id = c.getLong(c.getColumnIndex(Structure.Messages.ID));
 			m.contact = c.getString(c.getColumnIndex(Structure.Messages.CONCACTNAME));
 			m.phoneNumber = c.getString(c.getColumnIndex(Structure.Messages.PHONENUMBER));
@@ -118,15 +120,7 @@ public class Database extends SQLiteOpenHelper
 	public void addMessage(Message message)
 	{
 		SQLiteDatabase db = getWritableDatabase();
-		
-		ContentValues cv = new ContentValues();
-		cv.put(Structure.Messages.PHONENUMBER, message.phoneNumber);
-		cv.put(Structure.Messages.MESSAGE, message.message);
-		cv.put(Structure.Messages.TIME, message.when.getTime());
-		cv.put(Structure.Messages.ENABLED, convert(message.isEnabled));
-		cv.put(Structure.Messages.CONCACTNAME, message.contact);
-		cv.put(Structure.Messages.ISTIMEENABLED, convert(message.isTimeEnabled));
-		
+		ContentValues cv = getContentValues(message);
 		long id = db.insertOrThrow(Structure.Tables.MESSAGES, null, cv);
 		message.id = id;
 	}
@@ -143,17 +137,23 @@ public class Database extends SQLiteOpenHelper
 			 return;
 		}
 		
+		ContentValues cv = getContentValues(message);
+		
+		SQLiteDatabase db = getWritableDatabase();
+		db.update(Structure.Tables.MESSAGES, cv, String.format("%s = ?", Structure.Messages.ID), new String[] {String.valueOf(message.id)});
+	}
+	
+	private ContentValues getContentValues(Message message)
+	{
 		ContentValues cv = new ContentValues();
+		cv.put(Structure.Messages.SERVICE, message.service);
 		cv.put(Structure.Messages.PHONENUMBER, message.phoneNumber);
 		cv.put(Structure.Messages.MESSAGE, message.message);
 		cv.put(Structure.Messages.TIME, message.when.getTime());
 		cv.put(Structure.Messages.ENABLED, convert(message.isEnabled));
 		cv.put(Structure.Messages.CONCACTNAME, message.contact);
 		cv.put(Structure.Messages.ISTIMEENABLED, convert(message.isTimeEnabled));
-		
-		SQLiteDatabase db = getWritableDatabase();
-		db.update(Structure.Tables.MESSAGES, cv, String.format("%s = ?", Structure.Messages.ID), new String[] {String.valueOf(message.id)});
-		
+		return cv;
 	}
 	/**
 	 * Delete message by id
@@ -268,9 +268,10 @@ public class Database extends SQLiteOpenHelper
 			public static final String ENABLED = "Enabled";
 			public static final String CONCACTNAME = "ConcactName";
 			public static final String ISTIMEENABLED = "IsTimeEnabled";
+			public static final String SERVICE = "Service";
 			
 			
-			public static final String[] ALL_COLUMNS = new String[] {ID,PHONENUMBER,MESSAGE,TIME,ENABLED,CONCACTNAME,ISTIMEENABLED};
+			public static final String[] ALL_COLUMNS = new String[] {ID,PHONENUMBER,MESSAGE,TIME,ENABLED,CONCACTNAME,ISTIMEENABLED,SERVICE};
 		}
 		
 		public final static class TemplateText

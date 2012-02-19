@@ -11,5 +11,7 @@ public class Message
 	public String contact;
 	public boolean isTimeEnabled;
 	public boolean isEnabled;
+	public String service;
+	
 	
 }

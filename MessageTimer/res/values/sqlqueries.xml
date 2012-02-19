@@ -3,6 +3,7 @@
 
     <string name="SQL_CREATE_TABLE_MESSAGES">        <![CDATA[
 	CREATE TABLE [Messages] ([ID] INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL, 
+								  [Service] TEXT NOT NULL, 
 			   					  [PhoneNumber] TEXT NOT NULL, 
 			   					  [ConcactName] TEXT NOT NULL,
 								  [Message] TEXT NOT NULL,
