@@ -1,5 +1,8 @@
 package com.devcamp.messagetimer;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import com.devcamp.messagetimer.model.Message;
 import com.devcamp.messagetimer.sender.Sender;
 import com.devcamp.messagetimer.tools.Database;
@@ -46,7 +49,7 @@ public class MessageBroadcastReceiver extends BroadcastReceiver
 			{
 				Database d = new Database(context);
 				m = d.getMessages(id).get(0);
-				sendMessage(m);
+				sendMessage(context, m);
 			}
 		}
 		catch(Throwable t)
@@ -56,16 +59,18 @@ public class MessageBroadcastReceiver extends BroadcastReceiver
 		showNotification(context, m, error);
 	}
 	
-	private void sendMessage(Message m) throws ClassNotFoundException, IllegalAccessException, InstantiationException
+	private void sendMessage(Context context,Message m) throws ClassNotFoundException, IllegalAccessException, InstantiationException, IllegalArgumentException, InvocationTargetException
 	{
-		Sender s = getSender(m.service);
+		Sender s = getSender(context, m.service);
 		s.sendMessage(m.phoneNumber, m.message);
 	}
 	
-	private Sender getSender(String service) throws ClassNotFoundException, IllegalAccessException, InstantiationException
+	private Sender getSender(Context context, String service) throws ClassNotFoundException, IllegalAccessException, InstantiationException, IllegalArgumentException, InvocationTargetException
 	{
 		Class c = Class.forName(service);
-		Sender s = (Sender) c.newInstance();
+//		Sender s = (Sender) c.newInstance();
+		Constructor cst = c.getConstructors()[0];
+		Sender s = (Sender) cst.newInstance(context);
 		return s;
 	}
 	
@@ -79,7 +84,7 @@ public class MessageBroadcastReceiver extends BroadcastReceiver
 	{
 		NotificationManager nm = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);				
 		PendingIntent pi = PendingIntent.getBroadcast(c, 0, new Intent(), 0);
-		Notification n = new Notification(R.drawable.logo, m.contact, System.currentTimeMillis());	
+		Notification n = new Notification(android.R.drawable.stat_notify_more, m.contact, System.currentTimeMillis());	
 		n.flags = Notification.FLAG_ONGOING_EVENT;
 		String title = String.format("%s (%s)",m.contact,m.phoneNumber);
 		String summary = null;
