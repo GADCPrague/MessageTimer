@@ -13,7 +13,6 @@ import com.devcamp.messagetimer.model.Message;
 
 public class MessageListPresenter {
 	private MessageListActivity mActivity = null;
-	private long mSelectedItemId;
 	
 	public MessageListPresenter(MessageListActivity activity)
 	{
