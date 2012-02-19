@@ -285,6 +285,7 @@ public class MessageEditorPresenter
 			
 			mAlarmManager.activateOrUpdateAlarm(m);
 			mActivity.showMessage(R.string.txtSaved);
+			mActivity.finish();
 		}
 		catch(InvalidParameterException ipe)
 		{
