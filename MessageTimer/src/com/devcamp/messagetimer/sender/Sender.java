@@ -26,5 +26,10 @@ public abstract class Sender
 		return mPropertyProvider.getString(name, null);
 	}
 	
+	public String getStringProperty(int resId)
+	{
+		return mPropertyProvider.getString(mContext.getString(resId), null);
+	}
+	
 	public abstract void sendMessage(String to, String message);
 }
