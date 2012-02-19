@@ -25,7 +25,7 @@ public class MessageListActivity extends ListActivity {
         init();
  		new MessageListPresenter(this);
  		
- 		Intent i = new Intent(this, MessageEditorActivity.class);
+ 		Intent i = new Intent(this, PreferencesActivity.class);
  		startActivity(i);
     }
     

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+	<PreferenceCategory android:title="@string/txtICQ">
+	    <EditTextPreference android:title="@string/txtUserName"
+	        android:key="@string/PROPERTY_ICQ_LOGIN"/>
+	    <EditTextPreference android:title="@string/txtPassword"	                 
+	        android:key="@string/PROPERTY_ICQ_PASSWORD"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/txtGTalk">
+	    <EditTextPreference android:title="@string/txtUserName"
+	        android:key="@string/PROPERTY_GTALK_LOGIN"/>
+	    <EditTextPreference android:title="@string/txtPassword"	               
+	        android:key="@string/PROPERTY_GTALK_PASSWORD"/>
+    </PreferenceCategory>
+</PreferenceScreen>

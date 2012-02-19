@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.devcamp.messagetimer.MessageEditorActivity" />
+        <activity android:name="com.devcamp.messagetimer.PreferencesActivity" />
     </application>
 	
 </manifest>

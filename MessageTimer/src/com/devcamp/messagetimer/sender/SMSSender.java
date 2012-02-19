@@ -1,10 +1,12 @@
 package com.devcamp.messagetimer.sender;
 
+import com.devcamp.messagetimer.tools.PropertyProvider;
+
 import android.content.Context;
 
 public class SMSSender extends Sender
 {
-
+	
 	public SMSSender(Context context)
 	{
 		super(context);
@@ -14,7 +16,7 @@ public class SMSSender extends Sender
 	@Override
 	public void sendMessage(String to, String message)
 	{
-		// TODO Auto-generated method stub
+		
 	}
 
 }
