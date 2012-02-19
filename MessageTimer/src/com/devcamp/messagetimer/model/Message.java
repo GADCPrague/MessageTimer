@@ -18,7 +18,7 @@ public class Message
 	{
 		if(phoneNumber.trim().length() == 0) throw new InvalidParameterException("phoneNumber");
 		if(message.trim().length() == 0) throw new InvalidParameterException("message");
-		if(when == null || when.getTime() < System.currentTimeMillis()) throw new InvalidParameterException("when");
+		if(when == null) throw new InvalidParameterException("when");
 		if(contact.trim().length() == 0) throw new InvalidParameterException("contact");
 		if(service.trim().length() == 0) throw new InvalidParameterException("service");
 	}

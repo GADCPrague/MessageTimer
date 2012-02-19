@@ -35,7 +35,7 @@ public class MessageEditorActivity extends BaseActivity
 	{
 		super.onCreate(savedInstanceState);
 		init();
-		new MessageEditorPresenter(this);
+		mPresenter = new MessageEditorPresenter(this);
 	}
 	
 	private void init()

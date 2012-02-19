@@ -17,11 +17,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.text.method.CharacterPickerDialog;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -150,6 +152,7 @@ public class MessageEditorPresenter
 	private void loadTemplates()
 	{
 		List<TemplateText> templates = mDatabase.getTemplates();
+		templates.add(0, new TemplateText());
 		ArrayAdapter<TemplateText> adapter = new ArrayAdapter<TemplateText>(mActivity, android.R.layout.simple_spinner_item,templates);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mActivity.getTemplate().setAdapter(adapter);
@@ -194,12 +197,14 @@ public class MessageEditorPresenter
 		mCurrentItem.isEnabled = true;///TODO
 		mCurrentItem.when = getDateTime();
 		
-		return null;
+		return mCurrentItem;
 	}
 	
 	private Date getDateTime()
 	{
-		return new Date(mLastDate.getYear(), mLastDate.getMonth(), mLastDate.getDay(),mLastTime.getHours(),mLastTime.getMinutes(),mLastTime.getSeconds());
+		if(mLastDate == null) throw new InvalidParameterException("DATE");
+		if(mLastTime == null) throw new InvalidParameterException("TIME");
+		return new Date(mLastDate.getYear(), mLastDate.getMonth(), mLastDate.getDate(),mLastTime.getHours(),mLastTime.getMinutes(),mLastTime.getSeconds());
 	}
 	
 	public void onAddTemplateClick()
@@ -209,6 +214,7 @@ public class MessageEditorPresenter
 		ll.setPadding(5, 2, 5, 2);
 		
 		final EditText et = new EditText(mActivity);
+		et.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		ll.addView(et);
 		
 		b.setPositiveButton(R.string.txtOK, new Dialog.OnClickListener()
@@ -219,11 +225,13 @@ public class MessageEditorPresenter
 				String t = et.getText().toString();
 				TemplateText tt = new TemplateText();
 				tt.name = t;
-				tt.value = mActivity.getMessage().toString();
+				tt.value = mActivity.getMessage().getText().toString();
 				onAddTemplate(tt);
 			}
 		});
+		b.setTitle(R.string.txtTemplateName);
 		b.setView(ll);
+		b.create().show();
 	}
 	
 	public void onAddTemplate(TemplateText tt)
@@ -238,6 +246,8 @@ public class MessageEditorPresenter
 			//save to DB
 			mDatabase.addTemplate(tt);
 			mActivity.showDialog(R.string.txtSaved);
+			
+			loadTemplates();///TODO BETTER
 			
 		}
 		catch(Exception e)
@@ -324,19 +334,20 @@ public class MessageEditorPresenter
 	
 	public void onSelectedTemplate(TemplateText tt)
 	{
-		mActivity.getMessage().setText(tt.value);
+		if(tt != null && tt.name != null)//name can be null if first null 
+			mActivity.getMessage().setText(tt.value);
 	}
 	
 	public void onAddingContact()
 	{
 		Uri uri = null;
 		String msgSender = mServiceValues[mActivity.getService().getSelectedItemPosition()];
-		if(msgSender.contains("SMS"))
+		if(msgSender.equals(SMSSender.class.getName()))
 			uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-		else if (msgSender.contains("Email"))
-			uri = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
-		else if (msgSender.contains("GTalk"))
-			uri = ContactsContract.Contacts.CONTENT_URI;
+//		else if (msgSender.contains(MailSender.class.getName()))
+//			uri = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
+//		else if (msgSender.contains(MailSender.class.getName()))
+//			uri = ContactsContract.Contacts.CONTENT_URI;
 		
 		if(uri != null)
 		{
@@ -401,9 +412,12 @@ public class MessageEditorPresenter
         Cursor c =  mActivity.managedQuery(contactData, null, null, null, null);
         if (c.moveToFirst()) 
         {
-//        	String name = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Email.DISPLAY_NAME));
-//        	String value = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Email.));
-//        	onSelectContact(name,value);
+        	String name = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Email.DISPLAY_NAME));
+        	for(int i = 0;i<c.getColumnCount();i++)
+        	{
+        		Log.d("",1 + " " + c.getColumnName(i) + " " + c.getString(i));
+        	}
+        	onSelectContact(name,name);
         }
         c.close();
 	}

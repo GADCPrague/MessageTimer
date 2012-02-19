@@ -9,6 +9,8 @@ public class TemplateText
 	@Override
 	public String toString()
 	{
+		if(name == null)
+			return "";
 		return name;
 	}
 }
