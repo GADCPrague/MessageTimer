@@ -6,17 +6,18 @@ import com.devcamp.messagetimer.model.Message;
 import com.devcamp.messagetimer.presenter.MessageListPresenter;
 import com.devcamp.messagetimer.tools.Database;
 
-
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
-public class MessageListActivity extends ListActivity {
+public class MessageListActivity extends BaseActivity {
 	
-	private Database mDb = null;
 	private ImageButton mAddMessage = null;
+	private ListView mList = null;
+	private View mContentView = null;
+	private Database mDb = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,17 +31,25 @@ public class MessageListActivity extends ListActivity {
     }
     
     private void init() {
-    	mDb = new Database(this);
-        this.setListAdapter(new MessageAdapter(this,R.layout.message_list_item,(ArrayList<Message>)mDb.getMessages()));
-        
+     
         mAddMessage = (ImageButton) findViewById(R.id.btn_message_add);
+        mContentView = View.inflate(this, R.layout.message_editor, null);
+        mList =  (ListView) findViewById(android.R.id.list);
+        mDb = this.getDatabase();
+        mList.setAdapter(new MessageAdapter(this,R.layout.message_list_item,(ArrayList<Message>)mDb.getMessages()));
 	}
     
     public ImageButton GetAddMessage(){
     	return mAddMessage;
     }
     
-    public Database GetDb(){
-    	return mDb;
+    public ListView GetList(){
+    	return mList;
     }
+    
+	@Override
+	protected View getContentView() {
+		return mContentView;
+	}
+	
 }
