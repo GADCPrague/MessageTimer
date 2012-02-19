@@ -4,5 +4,10 @@
     
     <string name="txtAddNewTemplate">Add new template</string>
     <string name="txtSaveMessage">Save message</string>
+    <string name="txtOK">OK</string>
+    <string name="txtCancel">Cancel</string>
+    <string name="txtSaved">Saved</string>
 
+        
+    <string name="txtNoSelector">No selector for this type!</string>
 </resources>

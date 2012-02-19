@@ -8,6 +8,7 @@ import com.devcamp.messagetimer.tools.Database;
 
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -23,6 +24,9 @@ public class MessageListActivity extends ListActivity {
         setContentView(R.layout.message_list);
         init();
  		new MessageListPresenter(this);
+ 		
+ 		Intent i = new Intent(this, MessageEditorActivity.class);
+ 		startActivity(i);
     }
     
     private void init() {
