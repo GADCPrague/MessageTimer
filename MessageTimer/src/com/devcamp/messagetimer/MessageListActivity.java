@@ -8,6 +8,10 @@ import com.devcamp.messagetimer.tools.Database;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -26,13 +30,9 @@ public class MessageListActivity extends BaseActivity {
         setContentView(R.layout.message_list);
         init();
  		new MessageListPresenter(this);
- 		
- 		Intent i = new Intent(this, PreferencesActivity.class);
- 		startActivity(i);
     }
     
     private void init() {
-     
         mAddMessage = (Button) findViewById(R.id.btn_message_add);
         mContentView = View.inflate(this, R.layout.message_editor, null);
         mList =  (ListView) findViewById(android.R.id.list);
@@ -58,5 +58,28 @@ public class MessageListActivity extends BaseActivity {
 		mList.setAdapter(new MessageAdapter(this,R.layout.message_list_item,(ArrayList<Message>)mDb.getMessages()));
 		super.onResume();
 	} 
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+            switch (item.getItemId())
+            {
+            case R.id.muOpenPreference:
+            	Intent i = new Intent(this, PreferencesActivity.class);
+         		startActivity(i);
+                break;
+            default:
+                    return super.onOptionsItemSelected(item);
+            }
+            return true;
+    }
+
 	
 }
