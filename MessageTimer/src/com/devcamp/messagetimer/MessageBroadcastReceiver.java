@@ -85,7 +85,7 @@ public class MessageBroadcastReceiver extends BroadcastReceiver
 		NotificationManager nm = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);				
 		PendingIntent pi = PendingIntent.getBroadcast(c, 0, new Intent(), 0);
 		Notification n = new Notification(android.R.drawable.stat_notify_more, m.contact, System.currentTimeMillis());	
-		n.flags = Notification.FLAG_ONGOING_EVENT;
+//		n.flags = Notification.FLAG_ONGOING_EVENT;
 		String title = String.format("%s (%s)",m.contact,m.phoneNumber);
 		String summary = null;
 		if(t == null)
