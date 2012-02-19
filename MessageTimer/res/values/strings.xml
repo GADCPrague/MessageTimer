@@ -16,5 +16,5 @@
     <string name="txtPassword">Password</string>
     <string name="btnAddNewMessage"><b>Add new message ...</b></string>
     <string name="lblOpenPreferences">OpenPreferences</string>
-
+	<string name="txtMessageHasBeenSent">Message has been sent</string>
 </resources>
